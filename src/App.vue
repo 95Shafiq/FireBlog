@@ -1,9 +1,9 @@
 <template>
   <div class="app-wrapper">
     <div class="app">
-      <Navigation v-if="!navigationDisabled"/>
+      <Navigation v-if="!navigationDisabled" />
       <router-view />
-      <Footer v-if="!navigationDisabled"/>
+      <Footer v-if="!navigationDisabled" />
     </div>
   </div>
 </template>
@@ -11,6 +11,8 @@
 <script>
   import Navigation from './components/navigation.vue'
   import Footer from './components/Footer.vue'
+  import firebase from "firebase/app"
+  import "firebase/auth"
   export default {
     name: "app",
     components: {
@@ -24,6 +26,13 @@
       };
     },
     created() {
+      firebase.auth().onAuthStateChanged((user) => {
+        this.$store.commit("updateUser", user);
+        if (user) {
+          this.$store.dispatch("getCurrentUser");
+          console.log(this.$store.state.profileEmail);
+        }
+      })
       this.checkRoute();
     },
     mounted() {},
@@ -118,7 +127,7 @@
     }
   }
 
-  .button-shost {
+  .button-ghost {
     color: #000;
     padding: 0px;
     border-radius: 0;
@@ -126,6 +135,7 @@
     font-size: 15px;
     font-weight: 500;
     background-color: transparent;
+
     @media (min-width: 700px) {
       margin-top: 0;
       margin-left: auto;
@@ -152,6 +162,7 @@
     position: relative;
     padding: 80px 16px;
     background-color: #f1f1f1;
+
     @media(min-width: 500px) {
       padding: 100px 16px;
     }
@@ -164,9 +175,11 @@
       @media(min-width: 500px) {
         grid-template-columns: repeat(2, 1fr);
       }
+
       @media(min-width: 900px) {
         grid-template-columns: repeat(3, 1fr);
       }
+
       @media(min-width: 1200px) {
         grid-template-columns: repeat(4, 1fr);
       }
