@@ -51,8 +51,13 @@ export default {
     };
   },
   methods: {
-    updateProfile() {},
-    closeModal() {},
+    updateProfile() {
+      this.$store.dispatch("updateUserSettings");
+      this.modalActive = !this.modalActive;
+    },
+    closeModal() {
+      this.modalActive = !this.modalActive;
+    },
   },
   computed: {
     firstName: {

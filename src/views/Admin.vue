@@ -2,6 +2,7 @@
   <div class="admin">
     <div class="container">
       <h2>Administration</h2>
+      <p class="red">This Feature isn't available</p>
       <div class="admin-info">
         <h2>Add Admin</h2>
         <div class="input">
@@ -13,7 +14,7 @@
           />
         </div>
         <span>{{ this.functionMsg }}</span>
-        <button @click="addAdmin" class="button">Submit</button>
+        <button class="button">Submit</button>
       </div>
     </div>
   </div>
@@ -21,7 +22,7 @@
 
 <script>
 // import firebase from "firebase/app";
-import "firebase/functions";
+// import "firebase/functions";
 export default {
   name: "Admin",
   data() {
@@ -47,6 +48,11 @@ export default {
       margin-bottom: 16px;
       font-weight: 300;
       font-size: 32px;
+    }
+
+    .red {
+      text-align: center;
+      color: red;
     }
 
     .admin-info {
